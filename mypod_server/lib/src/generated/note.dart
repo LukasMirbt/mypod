@@ -10,52 +10,45 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Example extends _i1.TableRow {
-  Example._({
+abstract class Note extends _i1.TableRow {
+  Note._({
     int? id,
-    required this.name,
-    required this.data,
+    required this.text,
   }) : super(id);
 
-  factory Example({
+  factory Note({
     int? id,
-    required String name,
-    required int data,
-  }) = _ExampleImpl;
+    required String text,
+  }) = _NoteImpl;
 
-  factory Example.fromJson(
+  factory Note.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return Example(
+    return Note(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      name: serializationManager.deserialize<String>(jsonSerialization['name']),
-      data: serializationManager.deserialize<int>(jsonSerialization['data']),
+      text: serializationManager.deserialize<String>(jsonSerialization['text']),
     );
   }
 
-  static final t = ExampleTable();
+  static final t = NoteTable();
 
-  static const db = ExampleRepository._();
+  static const db = NoteRepository._();
 
-  String name;
-
-  int data;
+  String text;
 
   @override
   _i1.Table get table => t;
 
-  Example copyWith({
+  Note copyWith({
     int? id,
-    String? name,
-    int? data,
+    String? text,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
-      'name': name,
-      'data': data,
+      'text': text,
     };
   }
 
@@ -64,8 +57,7 @@ abstract class Example extends _i1.TableRow {
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
-      'name': name,
-      'data': data,
+      'text': text,
     };
   }
 
@@ -73,8 +65,7 @@ abstract class Example extends _i1.TableRow {
   Map<String, dynamic> allToJson() {
     return {
       if (id != null) 'id': id,
-      'name': name,
-      'data': data,
+      'text': text,
     };
   }
 
@@ -88,11 +79,8 @@ abstract class Example extends _i1.TableRow {
       case 'id':
         id = value;
         return;
-      case 'name':
-        name = value;
-        return;
-      case 'data':
-        data = value;
+      case 'text':
+        text = value;
         return;
       default:
         throw UnimplementedError();
@@ -100,9 +88,9 @@ abstract class Example extends _i1.TableRow {
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Example>> find(
+  static Future<List<Note>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<ExampleTable>? where,
+    _i1.WhereExpressionBuilder<NoteTable>? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -111,8 +99,8 @@ abstract class Example extends _i1.TableRow {
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Example>(
-      where: where != null ? where(Example.t) : null,
+    return session.db.find<Note>(
+      where: where != null ? where(Note.t) : null,
       limit: limit,
       offset: offset,
       orderBy: orderBy,
@@ -124,17 +112,17 @@ abstract class Example extends _i1.TableRow {
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Example?> findSingleRow(
+  static Future<Note?> findSingleRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<ExampleTable>? where,
+    _i1.WhereExpressionBuilder<NoteTable>? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findSingleRow<Example>(
-      where: where != null ? where(Example.t) : null,
+    return session.db.findSingleRow<Note>(
+      where: where != null ? where(Note.t) : null,
       offset: offset,
       orderBy: orderBy,
       orderDescending: orderDescending,
@@ -144,21 +132,21 @@ abstract class Example extends _i1.TableRow {
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Example?> findById(
+  static Future<Note?> findById(
     _i1.Session session,
     int id,
   ) async {
-    return session.db.findById<Example>(id);
+    return session.db.findById<Note>(id);
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
   static Future<int> delete(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<ExampleTable> where,
+    required _i1.WhereExpressionBuilder<NoteTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Example>(
-      where: where(Example.t),
+    return session.db.delete<Note>(
+      where: where(Note.t),
       transaction: transaction,
     );
   }
@@ -166,7 +154,7 @@ abstract class Example extends _i1.TableRow {
   @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
   static Future<bool> deleteRow(
     _i1.Session session,
-    Example row, {
+    Note row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteRow(
@@ -178,7 +166,7 @@ abstract class Example extends _i1.TableRow {
   @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
   static Future<bool> update(
     _i1.Session session,
-    Example row, {
+    Note row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.update(
@@ -191,7 +179,7 @@ abstract class Example extends _i1.TableRow {
       'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
   static Future<void> insert(
     _i1.Session session,
-    Example row, {
+    Note row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.insert(
@@ -203,39 +191,39 @@ abstract class Example extends _i1.TableRow {
   @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
   static Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<ExampleTable>? where,
+    _i1.WhereExpressionBuilder<NoteTable>? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Example>(
-      where: where != null ? where(Example.t) : null,
+    return session.db.count<Note>(
+      where: where != null ? where(Note.t) : null,
       limit: limit,
       useCache: useCache,
       transaction: transaction,
     );
   }
 
-  static ExampleInclude include() {
-    return ExampleInclude._();
+  static NoteInclude include() {
+    return NoteInclude._();
   }
 
-  static ExampleIncludeList includeList({
-    _i1.WhereExpressionBuilder<ExampleTable>? where,
+  static NoteIncludeList includeList({
+    _i1.WhereExpressionBuilder<NoteTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<ExampleTable>? orderBy,
+    _i1.OrderByBuilder<NoteTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<ExampleTable>? orderByList,
-    ExampleInclude? include,
+    _i1.OrderByListBuilder<NoteTable>? orderByList,
+    NoteInclude? include,
   }) {
-    return ExampleIncludeList._(
+    return NoteIncludeList._(
       where: where,
       limit: limit,
       offset: offset,
-      orderBy: orderBy?.call(Example.t),
+      orderBy: orderBy?.call(Note.t),
       orderDescending: orderDescending,
-      orderByList: orderByList?.call(Example.t),
+      orderByList: orderByList?.call(Note.t),
       include: include,
     );
   }
@@ -243,71 +231,60 @@ abstract class Example extends _i1.TableRow {
 
 class _Undefined {}
 
-class _ExampleImpl extends Example {
-  _ExampleImpl({
+class _NoteImpl extends Note {
+  _NoteImpl({
     int? id,
-    required String name,
-    required int data,
+    required String text,
   }) : super._(
           id: id,
-          name: name,
-          data: data,
+          text: text,
         );
 
   @override
-  Example copyWith({
+  Note copyWith({
     Object? id = _Undefined,
-    String? name,
-    int? data,
+    String? text,
   }) {
-    return Example(
+    return Note(
       id: id is int? ? id : this.id,
-      name: name ?? this.name,
-      data: data ?? this.data,
+      text: text ?? this.text,
     );
   }
 }
 
-class ExampleTable extends _i1.Table {
-  ExampleTable({super.tableRelation}) : super(tableName: 'example') {
-    name = _i1.ColumnString(
-      'name',
-      this,
-    );
-    data = _i1.ColumnInt(
-      'data',
+class NoteTable extends _i1.Table {
+  NoteTable({super.tableRelation}) : super(tableName: 'note') {
+    text = _i1.ColumnString(
+      'text',
       this,
     );
   }
 
-  late final _i1.ColumnString name;
-
-  late final _i1.ColumnInt data;
+  late final _i1.ColumnString text;
 
   @override
   List<_i1.Column> get columns => [
         id,
-        name,
-        data,
+        text,
       ];
 }
 
-@Deprecated('Use ExampleTable.t instead.')
-ExampleTable tExample = ExampleTable();
+@Deprecated('Use NoteTable.t instead.')
+NoteTable tNote = NoteTable();
 
-class ExampleInclude extends _i1.IncludeObject {
-  ExampleInclude._();
+class NoteInclude extends _i1.IncludeObject {
+  NoteInclude._();
 
   @override
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => Example.t;
+  _i1.Table get table => Note.t;
 }
 
-class ExampleIncludeList extends _i1.IncludeList {
-  ExampleIncludeList._({
-    _i1.WhereExpressionBuilder<ExampleTable>? where,
+class NoteIncludeList extends _i1.IncludeList {
+  NoteIncludeList._({
+    _i1.WhereExpressionBuilder<NoteTable>? where,
     super.limit,
     super.offset,
     super.orderBy,
@@ -315,33 +292,33 @@ class ExampleIncludeList extends _i1.IncludeList {
     super.orderByList,
     super.include,
   }) {
-    super.where = where?.call(Example.t);
+    super.where = where?.call(Note.t);
   }
 
   @override
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => Example.t;
+  _i1.Table get table => Note.t;
 }
 
-class ExampleRepository {
-  const ExampleRepository._();
+class NoteRepository {
+  const NoteRepository._();
 
-  Future<List<Example>> find(
+  Future<List<Note>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<ExampleTable>? where,
+    _i1.WhereExpressionBuilder<NoteTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<ExampleTable>? orderBy,
+    _i1.OrderByBuilder<NoteTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<ExampleTable>? orderByList,
+    _i1.OrderByListBuilder<NoteTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Example>(
-      where: where?.call(Example.t),
-      orderBy: orderBy?.call(Example.t),
-      orderByList: orderByList?.call(Example.t),
+    return session.dbNext.find<Note>(
+      where: where?.call(Note.t),
+      orderBy: orderBy?.call(Note.t),
+      orderByList: orderByList?.call(Note.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
@@ -349,90 +326,90 @@ class ExampleRepository {
     );
   }
 
-  Future<Example?> findFirstRow(
+  Future<Note?> findFirstRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<ExampleTable>? where,
+    _i1.WhereExpressionBuilder<NoteTable>? where,
     int? offset,
-    _i1.OrderByBuilder<ExampleTable>? orderBy,
+    _i1.OrderByBuilder<NoteTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<ExampleTable>? orderByList,
+    _i1.OrderByListBuilder<NoteTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Example>(
-      where: where?.call(Example.t),
-      orderBy: orderBy?.call(Example.t),
-      orderByList: orderByList?.call(Example.t),
+    return session.dbNext.findFirstRow<Note>(
+      where: where?.call(Note.t),
+      orderBy: orderBy?.call(Note.t),
+      orderByList: orderByList?.call(Note.t),
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
     );
   }
 
-  Future<Example?> findById(
+  Future<Note?> findById(
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Example>(
+    return session.dbNext.findById<Note>(
       id,
       transaction: transaction,
     );
   }
 
-  Future<List<Example>> insert(
+  Future<List<Note>> insert(
     _i1.Session session,
-    List<Example> rows, {
+    List<Note> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Example>(
+    return session.dbNext.insert<Note>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<Example> insertRow(
+  Future<Note> insertRow(
     _i1.Session session,
-    Example row, {
+    Note row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Example>(
+    return session.dbNext.insertRow<Note>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<Example>> update(
+  Future<List<Note>> update(
     _i1.Session session,
-    List<Example> rows, {
-    _i1.ColumnSelections<ExampleTable>? columns,
+    List<Note> rows, {
+    _i1.ColumnSelections<NoteTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Example>(
+    return session.dbNext.update<Note>(
       rows,
-      columns: columns?.call(Example.t),
+      columns: columns?.call(Note.t),
       transaction: transaction,
     );
   }
 
-  Future<Example> updateRow(
+  Future<Note> updateRow(
     _i1.Session session,
-    Example row, {
-    _i1.ColumnSelections<ExampleTable>? columns,
+    Note row, {
+    _i1.ColumnSelections<NoteTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Example>(
+    return session.dbNext.updateRow<Note>(
       row,
-      columns: columns?.call(Example.t),
+      columns: columns?.call(Note.t),
       transaction: transaction,
     );
   }
 
   Future<List<int>> delete(
     _i1.Session session,
-    List<Example> rows, {
+    List<Note> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Example>(
+    return session.dbNext.delete<Note>(
       rows,
       transaction: transaction,
     );
@@ -440,10 +417,10 @@ class ExampleRepository {
 
   Future<int> deleteRow(
     _i1.Session session,
-    Example row, {
+    Note row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Example>(
+    return session.dbNext.deleteRow<Note>(
       row,
       transaction: transaction,
     );
@@ -451,23 +428,23 @@ class ExampleRepository {
 
   Future<List<int>> deleteWhere(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<ExampleTable> where,
+    required _i1.WhereExpressionBuilder<NoteTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Example>(
-      where: where(Example.t),
+    return session.dbNext.deleteWhere<Note>(
+      where: where(Note.t),
       transaction: transaction,
     );
   }
 
   Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<ExampleTable>? where,
+    _i1.WhereExpressionBuilder<NoteTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Example>(
-      where: where?.call(Example.t),
+    return session.dbNext.count<Note>(
+      where: where?.call(Note.t),
       limit: limit,
       transaction: transaction,
     );

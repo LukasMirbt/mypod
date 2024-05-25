@@ -10,27 +10,24 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class Example extends _i1.SerializableEntity {
-  Example._({
+abstract class Note extends _i1.SerializableEntity {
+  Note._({
     this.id,
-    required this.name,
-    required this.data,
+    required this.text,
   });
 
-  factory Example({
+  factory Note({
     int? id,
-    required String name,
-    required int data,
-  }) = _ExampleImpl;
+    required String text,
+  }) = _NoteImpl;
 
-  factory Example.fromJson(
+  factory Note.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return Example(
+    return Note(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      name: serializationManager.deserialize<String>(jsonSerialization['name']),
-      data: serializationManager.deserialize<int>(jsonSerialization['data']),
+      text: serializationManager.deserialize<String>(jsonSerialization['text']),
     );
   }
 
@@ -39,48 +36,40 @@ abstract class Example extends _i1.SerializableEntity {
   /// the id will be null.
   int? id;
 
-  String name;
+  String text;
 
-  int data;
-
-  Example copyWith({
+  Note copyWith({
     int? id,
-    String? name,
-    int? data,
+    String? text,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
-      'name': name,
-      'data': data,
+      'text': text,
     };
   }
 }
 
 class _Undefined {}
 
-class _ExampleImpl extends Example {
-  _ExampleImpl({
+class _NoteImpl extends Note {
+  _NoteImpl({
     int? id,
-    required String name,
-    required int data,
+    required String text,
   }) : super._(
           id: id,
-          name: name,
-          data: data,
+          text: text,
         );
 
   @override
-  Example copyWith({
+  Note copyWith({
     Object? id = _Undefined,
-    String? name,
-    int? data,
+    String? text,
   }) {
-    return Example(
+    return Note(
       id: id is int? ? id : this.id,
-      name: name ?? this.name,
-      data: data ?? this.data,
+      text: text ?? this.text,
     );
   }
 }

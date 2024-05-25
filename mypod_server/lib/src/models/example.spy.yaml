@@ -9,6 +9,7 @@
 
 # Name of the class to generate.
 class: Example
+table: example
 
 # Add the table key, if this class represents a row in the database.
 #table: example

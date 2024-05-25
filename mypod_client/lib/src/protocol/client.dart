@@ -10,7 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'protocol.dart' as _i3;
+import 'package:mypod_client/src/protocol/note.dart' as _i3;
+import 'protocol.dart' as _i4;
 
 /// {@category Endpoint}
 class EndpointExample extends _i1.EndpointRef {
@@ -26,6 +27,33 @@ class EndpointExample extends _i1.EndpointRef {
       );
 }
 
+/// {@category Endpoint}
+class EndpointNote extends _i1.EndpointRef {
+  EndpointNote(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'note';
+
+  _i2.Future<List<_i3.Note>> fetchAll() =>
+      caller.callServerEndpoint<List<_i3.Note>>(
+        'note',
+        'fetchAll',
+        {},
+      );
+
+  _i2.Future<void> create(_i3.Note note) => caller.callServerEndpoint<void>(
+        'note',
+        'create',
+        {'note': note},
+      );
+
+  _i2.Future<void> delete(_i3.Note note) => caller.callServerEndpoint<void>(
+        'note',
+        'delete',
+        {'note': note},
+      );
+}
+
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
@@ -35,19 +63,25 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i3.Protocol(),
+          _i4.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
           connectionTimeout: connectionTimeout,
         ) {
     example = EndpointExample(this);
+    note = EndpointNote(this);
   }
 
   late final EndpointExample example;
 
+  late final EndpointNote note;
+
   @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {'example': example};
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'example': example,
+        'note': note,
+      };
 
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};
