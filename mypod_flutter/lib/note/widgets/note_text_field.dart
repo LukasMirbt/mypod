@@ -31,7 +31,7 @@ class _NoteTextFieldState extends State<NoteTextField> {
       decoration: const InputDecoration(
         hintText: 'Note',
       ),
-      onChanged: context.read<NoteCubit>().onChanged,
+      onChanged: context.read<NoteCubit>().onTextChanged,
       onSubmitted: (value) {
         context.read<NoteCubit>().add();
         _controller.clear();

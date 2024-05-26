@@ -17,32 +17,25 @@ class NoteEndpoint extends Endpoint {
     );
   }
 
-  void _emit(Session session, NoteList noteList) async {
-    session.messages.postMessage(_noteChannel, noteList);
-  }
-
   Future<NoteList> fetchAll(Session session) async {
     final items = await Note.db.find(
       session,
       orderBy: (t) => t.id,
     );
     final noteList = NoteList(items: items);
-    _emit(session, noteList);
-
+    session.messages.postMessage(_noteChannel, noteList);
     return noteList;
   }
 
-  Future<void> create(Session session, Note note) async {
+  Future<NoteList> create(Session session, Note note) async {
     await Note.db.insertRow(session, note);
-
     final noteList = await fetchAll(session);
-    _emit(session, noteList);
+    return noteList;
   }
 
-  Future<void> delete(Session session, Note note) async {
+  Future<NoteList> delete(Session session, Note note) async {
     await Note.db.deleteRow(session, note);
-
     final noteList = await fetchAll(session);
-    _emit(session, noteList);
+    return noteList;
   }
 }

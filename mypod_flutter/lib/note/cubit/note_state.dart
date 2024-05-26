@@ -9,4 +9,8 @@ class NoteState with _$NoteState {
     required NoteList list,
     @Default('') String text,
   }) = _NoteState;
+
+  factory NoteState.initial() => NoteState(
+        list: NoteList(items: []),
+      );
 }
