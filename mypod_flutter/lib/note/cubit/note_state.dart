@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mypod_client/mypod_client.dart';
 
 part 'note_state.freezed.dart';
 

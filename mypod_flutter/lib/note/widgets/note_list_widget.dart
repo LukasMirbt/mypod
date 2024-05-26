@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mypod_client/mypod_client.dart';
 import 'package:mypod_flutter/note/cubit/cubit.dart';
 
 class NoteListWidget extends StatelessWidget {
