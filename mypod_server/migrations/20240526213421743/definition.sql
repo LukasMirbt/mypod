@@ -10,14 +10,6 @@ CREATE TABLE "example" (
 );
 
 --
--- Class Note as table note
---
-CREATE TABLE "note" (
-    "id" serial PRIMARY KEY,
-    "text" text NOT NULL
-);
-
---
 -- Class AuthKey as table serverpod_auth_key
 --
 CREATE TABLE "serverpod_auth_key" (
@@ -272,9 +264,9 @@ ALTER TABLE ONLY "serverpod_query_log"
 -- MIGRATION VERSION FOR mypod
 --
 INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
-    VALUES ('mypod', '20240525161542960', now())
+    VALUES ('mypod', '20240526213421743', now())
     ON CONFLICT ("module")
-    DO UPDATE SET "version" = '20240525161542960', "timestamp" = now();
+    DO UPDATE SET "version" = '20240526213421743', "timestamp" = now();
 
 --
 -- MIGRATION VERSION FOR serverpod

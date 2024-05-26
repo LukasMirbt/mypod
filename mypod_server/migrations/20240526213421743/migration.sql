@@ -3,6 +3,15 @@ BEGIN;
 --
 -- ACTION CREATE TABLE
 --
+CREATE TABLE "example" (
+    "id" serial PRIMARY KEY,
+    "name" text NOT NULL,
+    "data" integer NOT NULL
+);
+
+--
+-- ACTION CREATE TABLE
+--
 CREATE TABLE "serverpod_auth_key" (
     "id" serial PRIMARY KEY,
     "userId" integer NOT NULL,
@@ -255,9 +264,9 @@ ALTER TABLE ONLY "serverpod_query_log"
 -- MIGRATION VERSION FOR mypod
 --
 INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
-    VALUES ('mypod', '20240524190920668', now())
+    VALUES ('mypod', '20240526213421743', now())
     ON CONFLICT ("module")
-    DO UPDATE SET "version" = '20240524190920668', "timestamp" = now();
+    DO UPDATE SET "version" = '20240526213421743', "timestamp" = now();
 
 --
 -- MIGRATION VERSION FOR serverpod
