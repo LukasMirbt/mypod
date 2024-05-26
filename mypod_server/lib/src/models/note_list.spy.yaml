@@ -1,3 +1,0 @@
-class: NoteList
-fields:
-  items: List<Note>

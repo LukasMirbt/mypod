@@ -1,6 +1,2 @@
 example:
   - hello:
-note:
-  - fetchAll:
-  - create:
-  - delete:

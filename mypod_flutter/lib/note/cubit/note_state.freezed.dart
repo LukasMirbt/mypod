@@ -45,11 +45,11 @@ class _$NoteStateCopyWithImpl<$Res, $Val extends NoteState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? list = null,
+    Object? list = freezed,
     Object? text = null,
   }) {
     return _then(_value.copyWith(
-      list: null == list
+      list: freezed == list
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
               as NoteList,
@@ -83,11 +83,11 @@ class __$$NoteStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? list = null,
+    Object? list = freezed,
     Object? text = null,
   }) {
     return _then(_$NoteStateImpl(
-      list: null == list
+      list: freezed == list
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
               as NoteList,
@@ -120,12 +120,13 @@ class _$NoteStateImpl implements _NoteState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NoteStateImpl &&
-            (identical(other.list, list) || other.list == list) &&
+            const DeepCollectionEquality().equals(other.list, list) &&
             (identical(other.text, text) || other.text == text));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, list, text);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(list), text);
 
   @JsonKey(ignore: true)
   @override
