@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mypod_flutter/login/view/login_page.dart';
+import 'package:mypod_flutter/note/view/view.dart';
 
 class AppView extends StatelessWidget {
   const AppView({super.key});
@@ -11,7 +12,7 @@ class AppView extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      onGenerateRoute: (_) => LoginPage.route(),
+      onGenerateRoute: (_) => NotePage.route(),
     );
   }
 }
