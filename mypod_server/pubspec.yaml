@@ -7,7 +7,6 @@ environment:
 
 dependencies:
   serverpod: 1.2.7
-  serverpod_auth_server: 1.2.7
   serverpod_serialization: 1.2.7
 
 dev_dependencies:
