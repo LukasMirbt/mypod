@@ -1,0 +1,4 @@
+class: NoteList
+fields:
+  items:
+    type: List<Note>

@@ -13,7 +13,7 @@ class NotePage extends StatelessWidget {
       builder: (_) => BlocProvider(
         create: (context) => NoteCubit(
           context.read<Client>(),
-        )..load(),
+        )..start(),
         child: const NotePage(),
       ),
     );
@@ -31,7 +31,7 @@ class NotePage extends StatelessWidget {
           children: [
             NoteTextField(),
             SizedBox(height: 16),
-            NoteList(),
+            NoteListWidget(),
           ],
         ),
       ),

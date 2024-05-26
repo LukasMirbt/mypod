@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NoteState {
+  NoteList get list => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
-  List<Note> get list => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NoteStateCopyWith<NoteState> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $NoteStateCopyWith<$Res> {
   factory $NoteStateCopyWith(NoteState value, $Res Function(NoteState) then) =
       _$NoteStateCopyWithImpl<$Res, NoteState>;
   @useResult
-  $Res call({String text, List<Note> list});
+  $Res call({NoteList list, String text});
 }
 
 /// @nodoc
@@ -45,18 +45,18 @@ class _$NoteStateCopyWithImpl<$Res, $Val extends NoteState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = null,
     Object? list = null,
+    Object? text = null,
   }) {
     return _then(_value.copyWith(
+      list: null == list
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as NoteList,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      list: null == list
-          ? _value.list
-          : list // ignore: cast_nullable_to_non_nullable
-              as List<Note>,
     ) as $Val);
   }
 }
@@ -69,7 +69,7 @@ abstract class _$$NoteStateImplCopyWith<$Res>
       __$$NoteStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, List<Note> list});
+  $Res call({NoteList list, String text});
 }
 
 /// @nodoc
@@ -83,18 +83,18 @@ class __$$NoteStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = null,
     Object? list = null,
+    Object? text = null,
   }) {
     return _then(_$NoteStateImpl(
+      list: null == list
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as NoteList,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      list: null == list
-          ? _value._list
-          : list // ignore: cast_nullable_to_non_nullable
-              as List<Note>,
     ));
   }
 }
@@ -102,24 +102,17 @@ class __$$NoteStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NoteStateImpl implements _NoteState {
-  const _$NoteStateImpl({this.text = '', final List<Note> list = const []})
-      : _list = list;
+  const _$NoteStateImpl({required this.list, this.text = ''});
 
+  @override
+  final NoteList list;
   @override
   @JsonKey()
   final String text;
-  final List<Note> _list;
-  @override
-  @JsonKey()
-  List<Note> get list {
-    if (_list is EqualUnmodifiableListView) return _list;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_list);
-  }
 
   @override
   String toString() {
-    return 'NoteState(text: $text, list: $list)';
+    return 'NoteState(list: $list, text: $text)';
   }
 
   @override
@@ -127,13 +120,12 @@ class _$NoteStateImpl implements _NoteState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NoteStateImpl &&
-            (identical(other.text, text) || other.text == text) &&
-            const DeepCollectionEquality().equals(other._list, _list));
+            (identical(other.list, list) || other.list == list) &&
+            (identical(other.text, text) || other.text == text));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, text, const DeepCollectionEquality().hash(_list));
+  int get hashCode => Object.hash(runtimeType, list, text);
 
   @JsonKey(ignore: true)
   @override
@@ -143,13 +135,13 @@ class _$NoteStateImpl implements _NoteState {
 }
 
 abstract class _NoteState implements NoteState {
-  const factory _NoteState({final String text, final List<Note> list}) =
+  const factory _NoteState({required final NoteList list, final String text}) =
       _$NoteStateImpl;
 
   @override
-  String get text;
+  NoteList get list;
   @override
-  List<Note> get list;
+  String get text;
   @override
   @JsonKey(ignore: true)
   _$$NoteStateImplCopyWith<_$NoteStateImpl> get copyWith =>

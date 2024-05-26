@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mypod_client/mypod_client.dart';
 import 'package:mypod_flutter/note/cubit/cubit.dart';
 
-class NoteList extends StatelessWidget {
-  const NoteList({super.key});
+class NoteListWidget extends StatelessWidget {
+  const NoteListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class NoteList extends StatelessWidget {
 
     return Column(
       children: [
-        for (final note in list) _Item(note),
+        for (final note in list.items) _Item(note),
       ],
     );
   }

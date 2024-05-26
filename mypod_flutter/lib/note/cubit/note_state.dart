@@ -6,7 +6,7 @@ part 'note_state.freezed.dart';
 @freezed
 class NoteState with _$NoteState {
   const factory NoteState({
+    required NoteList list,
     @Default('') String text,
-    @Default([]) List<Note> list,
   }) = _NoteState;
 }

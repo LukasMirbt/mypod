@@ -31,6 +31,8 @@ dependencies:
   mypod_client:
     path: ../mypod_client
   provider: ^6.1.2
+  serverpod_auth_email_flutter: 1.2.7
+  serverpod_auth_shared_flutter: 1.2.7
   serverpod_flutter: 1.2.7
 
 dev_dependencies:

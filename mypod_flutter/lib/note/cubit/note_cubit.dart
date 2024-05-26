@@ -3,11 +3,28 @@ import 'package:mypod_client/mypod_client.dart';
 import 'package:mypod_flutter/note/cubit/note_state.dart';
 
 class NoteCubit extends Cubit<NoteState> {
-  NoteCubit(this._client) : super(const NoteState());
+  NoteCubit(this._client)
+      : super(
+          NoteState(
+            list: NoteList(items: []),
+          ),
+        ) {
+    _client.note.stream.listen(_onUpdated);
+  }
 
   final Client _client;
 
-  Future<void> load() async {
+  void _onUpdated(SerializableEntity list) {
+    emit(
+      state.copyWith(
+        list: list as NoteList,
+      ),
+    );
+  }
+
+  Future<void> start() async {
+    await _client.openStreamingConnection();
+
     final list = await _client.note.fetchAll();
 
     emit(
@@ -32,7 +49,9 @@ class NoteCubit extends Cubit<NoteState> {
 
     emit(
       state.copyWith(
-        list: [...state.list, note],
+        list: state.list.copyWith(
+          items: [...state.list.items, note],
+        ),
       ),
     );
   }
@@ -42,10 +61,12 @@ class NoteCubit extends Cubit<NoteState> {
 
     emit(
       state.copyWith(
-        list: [
-          for (final note in state.list)
-            if (note != noteToDelete) note,
-        ],
+        list: state.list.copyWith(
+          items: [
+            for (final note in state.list.items)
+              if (note != noteToDelete) note,
+          ],
+        ),
       ),
     );
   }

@@ -10,8 +10,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:mypod_client/src/protocol/note.dart' as _i3;
-import 'protocol.dart' as _i4;
+import 'package:mypod_client/src/protocol/note_list.dart' as _i3;
+import 'package:mypod_client/src/protocol/note.dart' as _i4;
+import 'package:serverpod_auth_client/module.dart' as _i5;
+import 'protocol.dart' as _i6;
 
 /// {@category Endpoint}
 class EndpointExample extends _i1.EndpointRef {
@@ -34,24 +36,32 @@ class EndpointNote extends _i1.EndpointRef {
   @override
   String get name => 'note';
 
-  _i2.Future<List<_i3.Note>> fetchAll() =>
-      caller.callServerEndpoint<List<_i3.Note>>(
+  _i2.Future<_i3.NoteList> fetchAll() =>
+      caller.callServerEndpoint<_i3.NoteList>(
         'note',
         'fetchAll',
         {},
       );
 
-  _i2.Future<void> create(_i3.Note note) => caller.callServerEndpoint<void>(
+  _i2.Future<void> create(_i4.Note note) => caller.callServerEndpoint<void>(
         'note',
         'create',
         {'note': note},
       );
 
-  _i2.Future<void> delete(_i3.Note note) => caller.callServerEndpoint<void>(
+  _i2.Future<void> delete(_i4.Note note) => caller.callServerEndpoint<void>(
         'note',
         'delete',
         {'note': note},
       );
+}
+
+class _Modules {
+  _Modules(Client client) {
+    authentication = _i5.Caller(client);
+  }
+
+  late final _i5.Caller authentication;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -63,7 +73,7 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i4.Protocol(),
+          _i6.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -71,11 +81,14 @@ class Client extends _i1.ServerpodClient {
         ) {
     example = EndpointExample(this);
     note = EndpointNote(this);
+    modules = _Modules(this);
   }
 
   late final EndpointExample example;
 
   late final EndpointNote note;
+
+  late final _Modules modules;
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
@@ -84,5 +97,6 @@ class Client extends _i1.ServerpodClient {
       };
 
   @override
-  Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};
+  Map<String, _i1.ModuleEndpointCaller> get moduleLookup =>
+      {'authentication': modules.authentication};
 }
