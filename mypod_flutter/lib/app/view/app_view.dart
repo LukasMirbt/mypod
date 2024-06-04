@@ -12,7 +12,7 @@ class AppView extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      onGenerateRoute: (_) => NotePage.route(),
+      onGenerateRoute: (_) => LoginPage.route(),
     );
   }
 }

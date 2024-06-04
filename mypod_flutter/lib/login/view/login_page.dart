@@ -30,9 +30,7 @@ class _SignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox.shrink();
-
-/*     final client = context.watch<Client>();
+    final client = context.watch<Client>();
 
     return SignInWithEmailButton(
       caller: client.modules.authentication,
@@ -41,6 +39,6 @@ class _SignInButton extends StatelessWidget {
           NotePage.route(),
         );
       },
-    ); */
+    );
   }
 }

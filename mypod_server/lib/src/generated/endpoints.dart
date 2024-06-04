@@ -10,6 +10,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/example_endpoint.dart' as _i2;
+import '../endpoints/note_endpoint.dart' as _i3;
+import 'package:mypod_server/src/generated/note.dart' as _i4;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i5;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -20,7 +23,13 @@ class Endpoints extends _i1.EndpointDispatch {
           server,
           'example',
           null,
-        )
+        ),
+      'note': _i3.NoteEndpoint()
+        ..initialize(
+          server,
+          'note',
+          null,
+        ),
     };
     connectors['example'] = _i1.EndpointConnector(
       name: 'example',
@@ -46,5 +55,57 @@ class Endpoints extends _i1.EndpointDispatch {
         )
       },
     );
+    connectors['note'] = _i1.EndpointConnector(
+      name: 'note',
+      endpoint: endpoints['note']!,
+      methodConnectors: {
+        'fetchAll': _i1.MethodConnector(
+          name: 'fetchAll',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['note'] as _i3.NoteEndpoint).fetchAll(session),
+        ),
+        'create': _i1.MethodConnector(
+          name: 'create',
+          params: {
+            'note': _i1.ParameterDescription(
+              name: 'note',
+              type: _i1.getType<_i4.Note>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['note'] as _i3.NoteEndpoint).create(
+            session,
+            params['note'],
+          ),
+        ),
+        'delete': _i1.MethodConnector(
+          name: 'delete',
+          params: {
+            'note': _i1.ParameterDescription(
+              name: 'note',
+              type: _i1.getType<_i4.Note>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['note'] as _i3.NoteEndpoint).delete(
+            session,
+            params['note'],
+          ),
+        ),
+      },
+    );
+    modules['serverpod_auth'] = _i5.Endpoints()..initializeEndpoints(server);
   }
 }
